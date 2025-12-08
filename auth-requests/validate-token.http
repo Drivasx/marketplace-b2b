@@ -1,0 +1,4 @@
+### Validate token
+POST http://localhost:4001/auth/validate
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqdWFuQGV4YW1wbGUuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwidGVuYW50SWQiOiJkNzZmZmIwYS0yNmMzLTQwOWYtYmMzNS0yNjVjNWNmNWY5Y2MiLCJpYXQiOjE3NjUyMTM0ODYsImV4cCI6MTc2NTI0OTQ4Nn0.UMbS7BFakxEJG8eiaqaCKv-AMcF5j51meUAs5mEHd0sN_m-2dqG1m5TtF5LK4u8o
+###

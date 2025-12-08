@@ -1,0 +1,114 @@
+
+services:
+  auth-service-db:
+    image: postgres:17.2
+    container_name: auth-service-db
+    ports:
+      - "5000:5432"
+    restart: always
+    environment:
+      - POSTGRES_USER=admin_user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=db
+    volumes:
+      - $HOME/db_volumes/b2b-auth-service-db:/var/lib/postgresql/data
+    networks:
+      - internal
+
+  payment-service-db:
+    image: postgres:17.2
+    container_name: payment-service-db
+    ports:
+      - "5001:5432"
+    restart: always
+    environment:
+      - POSTGRES_USER=admin_user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=db
+    volumes:
+      - $HOME/db_volumes/b2b-payment-service-db:/var/lib/postgresql/data
+    networks:
+      - internal
+
+  inventory-service-db:
+    image: postgres:17.2
+    container_name: inventory-service-db
+    ports:
+      - "5002:5432"
+    restart: always
+    environment:
+      - POSTGRES_USER=admin_user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=db
+    volumes:
+      - $HOME/db_volumes/b2b-inventory-service-db:/var/lib/postgresql/data
+    networks:
+      - internal
+
+  order-service-db:
+    image: postgres:17.2
+    container_name: order-service-db
+    ports:
+      - "5003:5432"
+    restart: always
+    environment:
+      - POSTGRES_USER=admin_user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=db
+    volumes:
+      - $HOME/db_volumes/b2b-order-service-db:/var/lib/postgresql/data
+    networks:
+      - internal
+
+  company-service-db:
+    image: mongo:latest
+    container_name: company-service-db
+    ports:
+      - "5004:27017"
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin_user
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    networks:
+      - internal
+
+  product-service-db:
+    image: mongo:latest
+    container_name: product-service-db
+    ports:
+      - "5005:27017"
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin_user
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    networks:
+      - internal
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "5006:6379"
+    restart: always
+    volumes:
+      - $HOME/db_volumes/redis:/data
+    networks:
+      - internal
+
+  eureka-server:
+    image: eureka-server:latest
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - internal
+
+
+
+
+networks:
+  internal:
+    driver: bridge
+
+  kafka-net:
+    external: True
