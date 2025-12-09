@@ -55,13 +55,14 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: set IMAGE_NAME
-        run: echo "IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.service }}" >> GITHUB_ENV
+        run: echo "IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.service }}" >> $GITHUB_ENV
 
       - name: Build Docker image
         run: |
           docker build \ 
           -t $IMAGE_NAME:latest \ 
-          -t $IMAGE_NAME:${{ needs.build-and-test.outputs.commit-sha }} .
+          -t $IMAGE_NAME:${{ needs.build-and-test.outputs.commit-sha }} \
+          .
           
       - name: Push Docker images
         run: | 
