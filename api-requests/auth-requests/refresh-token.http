@@ -1,0 +1,10 @@
+### GET request to example server
+
+POST http://localhost:4000/api/v1/auth/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+
+###

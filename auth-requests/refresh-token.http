@@ -1,9 +1,0 @@
-### GET request to example server
-POST http://localhost:4001/auth/refresh
-Content-Type: application/json
-
-{
-  "refreshToken": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqdWFuQGV4YW1wbGUuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwidGVuYW50SWQiOiJkNzZmZmIwYS0yNmMzLTQwOWYtYmMzNS0yNjVjNWNmNWY5Y2MiLCJpYXQiOjE3NjUyMTM0NjYsImV4cCI6MTc2NTgxODI2Nn0.kfnu0CRezmhrnsM-iJ4VJRQEe8vdMALGIBuEckz9ud490F7nF4udEAZtKJ6Dt6Qt"
-}
-
-###

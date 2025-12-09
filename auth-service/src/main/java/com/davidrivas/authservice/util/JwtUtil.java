@@ -12,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class JwtUtil {
@@ -45,12 +46,13 @@ public class JwtUtil {
                 .compact();
     }
 
-    public void validateToken(String token) {
+    public boolean validateToken(String token) {
         try {
             Jwts.parser()
                     .verifyWith((SecretKey) secretKey)
                     .build()
                     .parseSignedClaims(token);
+            return true;
         } catch (SignatureException e) {
             throw new SignatureException("Invalid JWT signature");
         } catch (JwtException e) {
@@ -65,5 +67,25 @@ public class JwtUtil {
                 .parseSignedClaims(token)
                 .getPayload()
                 .getSubject();
+    }
+
+    public String extractTenantId(String token){
+        return Jwts.parser()
+                .verifyWith((SecretKey) secretKey)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .get("tenantId").toString();
+    }
+
+    public List<String> extractRoles(String token) {
+        return List.of(
+                Jwts.parser()
+                        .verifyWith((SecretKey) secretKey)
+                        .build()
+                        .parseSignedClaims(token)
+                        .getPayload()
+                        .get("role").toString()
+        );
     }
 }

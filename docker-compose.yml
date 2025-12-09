@@ -103,6 +103,34 @@ services:
     networks:
       - internal
 
+  auth-service:
+    image: auth-service:latest
+    container_name: auth-service
+    depends_on:
+      - auth-service-db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://auth-service-db:5432/db
+      - SPRING_DATASOURCE_USERNAME=admin_user
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+      - JWT_SECRET=0a049909d4e8374ff62641a9bacf2dc1ff050a9a9d3f9a95bbfe7e89617db70b
+    ports:
+      - "4001:4001"
+    networks:
+      - internal
+
+  api-gateway:
+    image: api-gateway:latest
+    container_name: api-gateway
+    environment:
+      - AUTH_SERVICE_URL=http://auth-service:4001/auth
+    ports:
+      - "4000:4000"
+    networks:
+      - internal
+
+
 
 
 

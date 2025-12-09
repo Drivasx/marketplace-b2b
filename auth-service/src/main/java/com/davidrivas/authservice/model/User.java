@@ -1,5 +1,6 @@
 package com.davidrivas.authservice.model;
 
+import com.davidrivas.authservice.enums.Roles;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -22,7 +23,6 @@ public class User {
 
     @NotNull
     @Column(name = "tenant_id", nullable = false)
-    @Tena
     private UUID tenantId;
 
     @Size(max = 255)
