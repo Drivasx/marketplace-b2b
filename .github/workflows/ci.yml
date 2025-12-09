@@ -61,7 +61,7 @@ jobs:
         run: |
           docker build \ 
           -t $IMAGE_NAME:latest \ 
-          -t $IMAGE_NAME:${{ needs.build-and-test.outputs.commit-sha }}./${{ matrix.service }} .
+          -t $IMAGE_NAME:${{ needs.build-and-test.outputs.commit-sha }} .
           
       - name: Push Docker images
         run: | 
