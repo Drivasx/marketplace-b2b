@@ -8,7 +8,6 @@ on:
 
 env:
   REGISTRY: docker.io
-  DOCKERHUB_USER: ${{secrets.DOCKERHUB_USERNAME}}
 
 jobs:
   build-and-test:
@@ -34,7 +33,7 @@ jobs:
           find . -name "pom.xml" -exec dir={} \; -exec mvn -f {} -B clean install \;
 
     outputs:
-      commit-sha: ${{github.sha}}
+      commit-sha: ${{ github.sha }}
 
   docker-build:
     needs: build-and-test
@@ -59,10 +58,10 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build \ 
-          -t $IMAGE_NAME:latest \ 
+          docker build \
+          -t $IMAGE_NAME:latest \
           -t $IMAGE_NAME:${{ needs.build-and-test.outputs.commit-sha }} \
-          .
+          ./${{ matrix.service }}
           
       - name: Push Docker images
         run: | 
