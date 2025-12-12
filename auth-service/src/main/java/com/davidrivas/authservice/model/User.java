@@ -22,7 +22,7 @@ public class User {
     private UUID id;
 
     @NotNull
-    @Column(name = "tenant_id", nullable = false)
+    @Column(name = "tenant_id", nullable = true)
     private UUID tenantId;
 
     @Size(max = 255)

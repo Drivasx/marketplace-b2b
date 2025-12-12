@@ -12,11 +12,11 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ServerWebExchange;
 
 @Component
-public class JwtValidationFilterFactory extends AbstractGatewayFilterFactory<Object> {
+public class JwtValidationGatewayFilterFactory extends AbstractGatewayFilterFactory<Object> {
 
     private final WebClient webClient;
 
-    public JwtValidationFilterFactory(WebClient.Builder webClientBuilder, @Value("${auth.service.url}") String authServiceUrl) {
+    public JwtValidationGatewayFilterFactory(WebClient.Builder webClientBuilder, @Value("${auth.service.url:http://localhost:4001/auth}") String authServiceUrl) {
         this.webClient = webClientBuilder.baseUrl(authServiceUrl).build();
     }
 
@@ -30,7 +30,7 @@ public class JwtValidationFilterFactory extends AbstractGatewayFilterFactory<Obj
                 return exchange.getResponse().setComplete();
             }
 
-            return webClient.get()
+            return webClient.post()
                     .uri("/validate")
                     .header(HttpHeaders.AUTHORIZATION, token)
                     .retrieve()
@@ -53,8 +53,8 @@ public class JwtValidationFilterFactory extends AbstractGatewayFilterFactory<Obj
                                 .build();
 
                         return chain.filter(mutatedExchange);
-                    })
-                    .then(chain.filter(exchange));
+                    });
+                    //.then(chain.filter(exchange));
 
         }));
     }

@@ -1,0 +1,9 @@
+### Signup and create a company
+GRPC localhost:9001/CompanyService/CreateCompany
+Content-Type: application/json
+
+{
+  name
+}
+
+###

@@ -8,22 +8,23 @@ spring:
         webflux:
           routes:
             - id: auth-service-route
-              uri: http://auth-service:4001
+              uri: http://localhost:4001
               predicates:
                 - Path=/api/v1/auth/**
               filters:
                 - StripPrefix=2
-                #- JwtValidation
 
-#            - id: company-service-route
-#              uri: http://localhost:4002
-#              predicates:
-#                - Path=/api/v1/company/**
-#              filters:
-#                - StripPrefix=2
+            - id: company-service-route
+              uri: http://localhost:4002
+              predicates:
+                - Path=/api/v1/company/**
+              filters:
+                - StripPrefix=2
+                - JwtValidation
 
 
 
 
 server:
   port: 4000
+

@@ -96,7 +96,7 @@ services:
       - internal
 
   eureka-server:
-    image: eureka-server:latest
+    image: drivasb197/eureka-server:latest
     container_name: eureka-server
     ports:
       - "8761:8761"
@@ -104,7 +104,7 @@ services:
       - internal
 
   auth-service:
-    image: auth-service:latest
+    image: drivasb197/auth-service:latest
     container_name: auth-service
     depends_on:
       - auth-service-db
@@ -121,7 +121,7 @@ services:
       - internal
 
   api-gateway:
-    image: api-gateway:latest
+    image: drivasb197/api-gateway:latest
     container_name: api-gateway
     environment:
       - AUTH_SERVICE_URL=http://auth-service:4001/auth
@@ -129,6 +129,7 @@ services:
       - "4000:4000"
     networks:
       - internal
+
 
 
 

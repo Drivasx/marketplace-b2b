@@ -1,0 +1,14 @@
+### GET request to example server
+PUT http://localhost:4002/company/900123411
+Content-Type: application/json
+
+{
+  "name": "Panaderias unidas 2 S.A.S",
+  "plan": "premium",
+  "settings": {
+    "currency": "USD",
+    "language": "en"
+  }
+}
+
+###

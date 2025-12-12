@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+
+option java_package = "company";
+
+service CompanyService{
+  rpc CreateCompany(CreateCompanyRequest) returns (CreateCompanyResponse);
+}
+
+message CreateCompanyRequest {
+  string name = 1;
+  string nit = 2;
+  string plan = 3;
+  string currency = 4;
+  string language = 5;
+  string owner_user_id = 6;
+}
+
+message CreateCompanyResponse {
+  string id = 1;
+}
