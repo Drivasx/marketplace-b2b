@@ -108,6 +108,7 @@ services:
     container_name: auth-service
     depends_on:
       - auth-service-db
+      - eureka-server
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://auth-service-db:5432/db
       - SPRING_DATASOURCE_USERNAME=admin_user
@@ -117,6 +118,7 @@ services:
       - JWT_SECRET=0a049909d4e8374ff62641a9bacf2dc1ff050a9a9d3f9a95bbfe7e89617db70b
       - COMPANY_SERVICE_ADDRESS=company-service
       - COMPANY_SERVICE_GRCP_PORT=9000
+      - SPRING_PROFILES_ACTIVE=prod
     ports:
       - "4001:4001"
     networks:
@@ -125,8 +127,11 @@ services:
   api-gateway:
     image: drivasb197/api-gateway:latest
     container_name: api-gateway
+    depends_on:
+      - eureka-server
     environment:
       - AUTH_SERVICE_URL=http://auth-service:4001/auth
+      - SPRING_PROFILES_ACTIVE=prod
     ports:
       - "4000:4000"
     networks:
@@ -135,8 +140,12 @@ services:
   company-service:
     image: drivasb197/company-service:latest
     container_name: company-service
+    depends_on:
+      - company-service-db
+      - eureka-server
     environment:
       - GRCP_SERVER_PORT=9000
+      - SPRING_PROFILES_ACTIVE=prod
     ports:
       - "4002:4002"
       - "9000:9000"
