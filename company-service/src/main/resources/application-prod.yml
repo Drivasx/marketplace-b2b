@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: company-service
+
+  data:
+    mongodb:
+      uri: mongodb://admin_user:password@company-service-db/db?authSource=admin
+
+server:
+  port: 4002
+
+grpc:
+  server:
+    port: 9000
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+  instance:
+    prefer-ip-address: true

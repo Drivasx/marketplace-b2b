@@ -115,6 +115,8 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
       - JWT_SECRET=0a049909d4e8374ff62641a9bacf2dc1ff050a9a9d3f9a95bbfe7e89617db70b
+      - COMPANY_SERVICE_ADDRESS=company-service
+      - COMPANY_SERVICE_GRCP_PORT=9000
     ports:
       - "4001:4001"
     networks:
@@ -127,6 +129,17 @@ services:
       - AUTH_SERVICE_URL=http://auth-service:4001/auth
     ports:
       - "4000:4000"
+    networks:
+      - internal
+
+  company-service:
+    image: drivasb197/company-service:latest
+    container_name: company-service
+    environment:
+      - GRCP_SERVER_PORT=9000
+    ports:
+      - "4002:4002"
+      - "9000:9000"
     networks:
       - internal
 
