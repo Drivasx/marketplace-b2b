@@ -41,7 +41,7 @@ jobs:
     
     strategy:
       matrix:
-        service: [ eureka-server, api-gateway, auth-service ]
+        service: [ eureka-server, api-gateway, auth-service, company-service ]
 
     steps:
       - name: Checkout repository
