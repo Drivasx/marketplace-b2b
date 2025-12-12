@@ -23,7 +23,14 @@ spring:
                 - JwtValidation
 
 
-
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+  instance:
+    prefer-ip-address: true
 
 server:
   port: 4000

@@ -98,6 +98,8 @@ services:
   eureka-server:
     image: drivasb197/eureka-server:latest
     container_name: eureka-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
     ports:
       - "8761:8761"
     networks:
